@@ -49,11 +49,11 @@ time = time.strftime("%H:%M:%S %Y/%m/%d")
 time = str(time)
 
 # Matching on IPaddress
-source = re.findall('UDP:.\[([\d.+]+)\]' ,r)
+source = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b" ,r)
 
 # Building the HEADER so that Zabbix understands it
 HEADER = ''.join(source)
-IP = str(source).strip("[]'")
+IP = source[0]
 HEADER = time + " ZBXTRAP  " +  str(IP)
 
 # Appending it to the log file for Zabbix to pickup
